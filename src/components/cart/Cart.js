@@ -5,11 +5,13 @@ import CartContext from '../../context/cart-context';
 import CartItem from './CartItem';
 import Card from '../UI/Card';
 import Backdrop from '../UI/Backdrop';
+import Checkout from './Checkout';
 import './Cart.css';
 
 const Cart = props => {
   const {cart} = useContext(CartContext);
   const [total, setTotal] = useState(0);
+  const [checkoutStage, setCheckoutStage] = useState(0);
 
   useEffect(() => {
     const tempTotal = cart.reduce((acc, item) => {
@@ -18,14 +20,17 @@ const Cart = props => {
     setTotal(tempTotal.toFixed(2));
   },[cart])
 
-  return (
-    <React.Fragment>
-      {ReactDOM.createPortal(
-        <Backdrop onClick={props.toggleCart} />,
-        document.getElementById('backdrop-root')
-      )}
-      {ReactDOM.createPortal(
-        <Card id="cart">
+  const formSubmitHandler = event => {
+    event.preventDefault();
+
+    setCheckoutStage(1);
+  }
+
+  const cartUI = () => {
+    if (checkoutStage === 0) {
+      return (
+      <Card id="cart">
+        <form onSubmit={formSubmitHandler}>
           {cart.map((item, index) => 
             <CartItem key={index} id={item.id} name={item.name} price={item.price} quantity={item.quantity} />)}
           <div className="total">
@@ -34,9 +39,25 @@ const Cart = props => {
           </div>
           <div className="actions">
             <button className="button--alt" onClick={props.toggleCart}>Close</button>
-            <button className="button">Order</button>
+            <button className="button" type="submit">Order</button>
           </div>
-        </Card>,
+        </form>
+      </Card>
+      );
+    }
+    if (checkoutStage === 1) {
+      return <Checkout toggleCart={props.toggleCart} />
+    }
+  }
+
+  return (
+    <React.Fragment>
+      {ReactDOM.createPortal(
+        <Backdrop onClick={props.toggleCart} />,
+        document.getElementById('backdrop-root')
+      )}
+      {ReactDOM.createPortal(
+        cartUI(),
         document.getElementById('modal-root')
       )}
     </React.Fragment>

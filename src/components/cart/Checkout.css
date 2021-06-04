@@ -1,0 +1,21 @@
+#checkout {
+    position: absolute;
+    width: 40%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    z-index: 20;
+  }
+
+  .checkout-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+
+  .inputs div {
+      padding: .5rem 0;
+  }
