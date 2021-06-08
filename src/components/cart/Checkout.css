@@ -1,21 +1,28 @@
 #checkout {
-    position: absolute;
-    width: 40%;
-    margin: auto;
-    left: 0;
-    right: 0;
-    z-index: 20;
-  }
+  position: absolute;
+  width: 40%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
 
-  .checkout-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    margin: 1rem 0;
-  }
+#checkout label {
+  display: inline-block;
+  width: 12rem;
+  text-align: right;
+  padding-right: 0.5rem;
+}
 
-  .inputs div {
-      padding: .5rem 0;
-  }
+.form-line {
+  padding-bottom: 0.5rem;
+}
+
+.error-text {
+  color: rgb(218, 2, 2);
+  padding-left: 12rem;
+}
+
+#checkout .actions {
+  padding-top: 1rem;
+}
