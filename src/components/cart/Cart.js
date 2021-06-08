@@ -30,7 +30,7 @@ const Cart = props => {
     if (checkoutStage === 0) {
       return (
       <Card id="cart">
-        <form onSubmit={formSubmitHandler}>
+        <form onSubmit={event=>event.preventDefault()}>
           {cart.map((item, index) => 
             <CartItem key={index} id={item.id} name={item.name} price={item.price} quantity={item.quantity} />)}
           <div className="total">
@@ -39,7 +39,7 @@ const Cart = props => {
           </div>
           <div className="actions">
             <button className="button--alt" onClick={props.toggleCart}>Close</button>
-            <button className="button" type="submit">Order</button>
+            <button className="button" type="button" onClick={formSubmitHandler}>Order</button>
           </div>
         </form>
       </Card>
