@@ -1,0 +1,8 @@
+#confirmation {
+  position: absolute;
+  width: 40%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}

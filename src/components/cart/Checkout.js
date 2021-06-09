@@ -8,7 +8,7 @@ import './Checkout.css';
 
 
 const Checkout = props => {
-    const { addContactInfo, contact } = useContext(CartContext);
+    const { addContactInfo } = useContext(CartContext);
 
     const formSubmitHandler = values => {
         const newContact = {
@@ -19,7 +19,8 @@ const Checkout = props => {
             zipCode: values.zipCode
         };
         addContactInfo(newContact);
-        props.toggleCart(); //temp
+        props.onSubmit();
+        // props.toggleCart(); //temp
     }
 
     return (

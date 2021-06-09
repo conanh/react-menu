@@ -6,6 +6,7 @@ import CartItem from './CartItem';
 import Card from '../UI/Card';
 import Backdrop from '../UI/Backdrop';
 import Checkout from './Checkout';
+import Confirmation from './Confirmation';
 import './Cart.css';
 
 const Cart = props => {
@@ -20,10 +21,14 @@ const Cart = props => {
     setTotal(tempTotal.toFixed(2));
   },[cart])
 
-  const formSubmitHandler = event => {
+  const cartSubmitHandler = event => {
     event.preventDefault();
-
     setCheckoutStage(1);
+  }
+
+  const contactSubmitHandler = event => {
+    // event.preventDefault();
+    setCheckoutStage(2);
   }
 
   const cartUI = () => {
@@ -39,14 +44,17 @@ const Cart = props => {
           </div>
           <div className="actions">
             <button className="button--alt" onClick={props.toggleCart}>Close</button>
-            <button className="button" type="button" onClick={formSubmitHandler}>Order</button>
+            <button className="button" type="button" onClick={cartSubmitHandler}>Order</button>
           </div>
         </form>
       </Card>
       );
     }
     if (checkoutStage === 1) {
-      return <Checkout toggleCart={props.toggleCart} />
+      return <Checkout toggleCart={props.toggleCart} onSubmit={contactSubmitHandler} />
+    }
+    if (checkoutStage === 2) {
+      return <Confirmation toggleCart={props.toggleCart} />
     }
   }
 
