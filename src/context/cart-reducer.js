@@ -1,4 +1,4 @@
-import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY } from './cart-actions';
+import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY, ADD_CONTACT_INFO } from './cart-actions';
 
 const cartReducer = (state, action) => {
   switch (action.type) {
@@ -46,6 +46,12 @@ const cartReducer = (state, action) => {
         }
       }
       return { ...state };
+    case ADD_CONTACT_INFO:
+      const contactInfo = action.payload;
+      return {
+        ...state,
+        contact: contactInfo
+      }
     default:
       return state;
   }

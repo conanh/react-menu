@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import CartContext from './cart-context';
 import cartReducer from './cart-reducer';
 
-import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY } from './cart-actions';
+import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY, ADD_CONTACT_INFO } from './cart-actions';
 
 const CartState = props => {
   const initialState = {
@@ -19,7 +19,14 @@ const CartState = props => {
         price: 16.50,
         quantity: 4
       }      
-    ] // {id, name, price, quantity}
+    ], // {id, name, price, quantity}
+    contact: {
+      fullName: '',
+      streetAddress: '',
+      city: '',
+      state: '',
+      zipCode: ''
+    }
   }
 
   const addToCart = cartItem => {
@@ -43,13 +50,22 @@ const CartState = props => {
     })
   };
 
+  const addContactInfo = contact => {
+    dispatch({
+      type: ADD_CONTACT_INFO,
+      payload: contact
+    })
+  }
+
   const [state, dispatch] = useReducer(cartReducer, initialState);
   return (
     <CartContext.Provider value={{
       cart: state.cart,
       addToCart,
       incrementQuantity,
-      decrementQuantity
+      decrementQuantity,
+      addContactInfo,
+      contact: state.contact
     }}>
       {props.children}
     </CartContext.Provider>

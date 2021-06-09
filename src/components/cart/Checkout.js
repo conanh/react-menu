@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import Card from '../UI/Card';
+import CartContext from '../../context/cart-context';
 
 import './Checkout.css';
 
-const Checkout = props => {
 
-    const formSubmitHandler = event => {
-        event.preventDefault();
-        props.toggleCart();
+const Checkout = props => {
+    const { addContactInfo, contact } = useContext(CartContext);
+
+    const formSubmitHandler = values => {
+        const newContact = {
+            fullName: values.fullName,
+            streetAddress: values.streetAddress,
+            city: values.city,
+            state: values.state,
+            zipCode: values.zipCode
+        };
+        addContactInfo(newContact);
+        props.toggleCart(); //temp
     }
 
     return (
@@ -44,12 +54,12 @@ const Checkout = props => {
                     </div>
                     <div className="form-line">
                         <label htmlFor="state">State</label>
-                        <Field name="state" type="text" minlength="2" maxlength="2" size="3" />
+                        <Field name="state" type="text" minLength="2" maxLength="2" size="3" />
                         <div className="error-text"><ErrorMessage name="state" /></div>
                     </div>
                     <div className="form-line">
                         <label htmlFor="zipCode">Zip Code</label>
-                        <Field name="zipCode" type="text" minlength="5" maxlength="5" size="5" />
+                        <Field name="zipCode" type="text" minLength="5" maxLength="5" size="5" />
                         <div className="error-text"><ErrorMessage name="zipCode" /></div>
                     </div>
                     <div className="actions">
