@@ -19,7 +19,7 @@ const Checkout = props => {
             zipCode: values.zipCode
         };
         addContactInfo(newContact);
-        props.onSubmit();
+        props.onSubmit(newContact);
         // props.toggleCart(); //temp
     }
 

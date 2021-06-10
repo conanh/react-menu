@@ -19,16 +19,26 @@ const Cart = props => {
       return acc + (item.quantity * item.price);
     },0);
     setTotal(tempTotal.toFixed(2));
-  },[cart])
+  },[cart]);
+
+  const submitOrderToBackend = async (order) => {
+    const response = await fetch('https://react-menu-1d60a-default-rtdb.firebaseio.com/orders.json', {
+      method: 'POST',
+      body: JSON.stringify(order),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const data = await response.json();
+    console.log(data);
+  }
 
   const cartSubmitHandler = event => {
     event.preventDefault();
     setCheckoutStage(1);
   }
 
-  const contactSubmitHandler = event => {
-    // event.preventDefault();
+  const contactSubmitHandler = contact => {
     setCheckoutStage(2);
+    submitOrderToBackend({cart, contact});
   }
 
   const cartUI = () => {
