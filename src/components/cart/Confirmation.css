@@ -7,3 +7,9 @@
   padding: 2rem;
   z-index: 20;
 }
+
+.confirmation-info {
+  padding: 1rem 0 2rem 0;
+  display: flex;
+  justify-content: space-evenly;
+}
