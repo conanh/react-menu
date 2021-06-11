@@ -10,7 +10,7 @@ import Confirmation from './Confirmation';
 import './Cart.css';
 
 const Cart = props => {
-  const {cart} = useContext(CartContext);
+  const {cart, resetCart} = useContext(CartContext);
   const [total, setTotal] = useState(0);
   const [checkoutStage, setCheckoutStage] = useState(0);
 
@@ -68,10 +68,17 @@ const Cart = props => {
     }
   }
 
+  const closeBackdrop = () => {
+    props.toggleCart();
+    if (checkoutStage === 2) {
+      resetCart();
+    }
+  }
+
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
-        <Backdrop onClick={props.toggleCart} />,
+        <Backdrop onClick={closeBackdrop} />,
         document.getElementById('backdrop-root')
       )}
       {ReactDOM.createPortal(

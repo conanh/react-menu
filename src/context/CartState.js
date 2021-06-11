@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import CartContext from './cart-context';
 import cartReducer from './cart-reducer';
 
-import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY, ADD_CONTACT_INFO } from './cart-actions';
+import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY, ADD_CONTACT_INFO, RESET_CART } from './cart-actions';
 
 const CartState = props => {
   const initialState = {
@@ -55,7 +55,13 @@ const CartState = props => {
       type: ADD_CONTACT_INFO,
       payload: contact
     })
-  }
+  };
+
+  const resetCart = () => {
+    dispatch({
+      type: RESET_CART
+    })
+  };
 
   const [state, dispatch] = useReducer(cartReducer, initialState);
   return (
@@ -65,7 +71,8 @@ const CartState = props => {
       incrementQuantity,
       decrementQuantity,
       addContactInfo,
-      contact: state.contact
+      contact: state.contact,
+      resetCart
     }}>
       {props.children}
     </CartContext.Provider>
