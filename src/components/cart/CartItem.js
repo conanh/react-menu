@@ -17,11 +17,13 @@ const CartItem = props => {
   return (
     <div className="cart-item">
       <h2>{props.name}</h2>
-      <div className="price">${props.price.toFixed(2)}</div>
-      <div className="amount">x {props.quantity}</div>
-      <div className="actions">
-        <button onClick={decrementHandler}>-</button>
-        <button onClick={incrementHandler}>+</button>
+      <div className="info">
+        <div className="price">${props.price.toFixed(2)}</div>
+        <div className="amount">x {props.quantity}</div>
+        <div className="actions">
+          <button onClick={decrementHandler}>-</button>
+          <button onClick={incrementHandler}>+</button>
+        </div>
       </div>
     </div>
   );
