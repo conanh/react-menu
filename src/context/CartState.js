@@ -6,20 +6,7 @@ import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY, ADD_CONTACT_INFO, 
 
 const CartState = props => {
   const initialState = {
-    cart: [
-      {
-        id: "m1",
-        name: "Sushi",
-        price: 22.99,
-        quantity: 1
-      },
-      {
-        id: "m2",
-        name: "Schnitzel",
-        price: 16.50,
-        quantity: 4
-      }      
-    ], // {id, name, price, quantity}
+    cart: [], // {id, name, price, quantity}
     contact: {
       fullName: '',
       streetAddress: '',
